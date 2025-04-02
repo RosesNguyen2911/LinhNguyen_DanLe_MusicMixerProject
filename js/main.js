@@ -36,7 +36,7 @@ function dropAnimal(event) {
     // Check if animal already placed
     dropSlots.forEach(slot => {
       let existing = slot.querySelector('.animal');
-      if (existing && existing.id === draggedId) {
+      if (existing && existing.id == draggedId) {
         isDuplicate = true;
       }
     });
@@ -70,12 +70,12 @@ function playSounds() {
       currentAudios.push(audio);
 
       let animClass = "";
-      if (animal.id === "chicken") animClass = "animate-chicken";
-      else if (animal.id === "cow") animClass = "animate-cow";
-      else if (animal.id === "pig") animClass = "animate-pig";
-      else if (animal.id === "sheep") animClass = "animate-sheep";
-      else if (animal.id === "horse") animClass = "animate-horse";
-      else if (animal.id === "duck") animClass = "animate-duck";
+      if (animal.id == "chicken") animClass = "animate-chicken";
+      else if (animal.id == "cow") animClass = "animate-cow";
+      else if (animal.id == "pig") animClass = "animate-pig";
+      else if (animal.id == "sheep") animClass = "animate-sheep";
+      else if (animal.id == "horse") animClass = "animate-horse";
+      else if (animal.id == "duck") animClass = "animate-duck";
 
       animal.classList.add(animClass);
       animal.setAttribute("data-anim-class", animClass);
