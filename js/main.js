@@ -1,59 +1,56 @@
 // STEP 1 - VARIABLES
 
-// Select all draggable animal elements
+// Get all animals that we can drag
 let animalList = document.querySelectorAll('.animal');
 
-// Select the drop zones on the stage
+// Get all drop zones on stage
 let dropSlots = document.querySelectorAll('.drop-slot');
 
-// Select control buttons
+// Buttons for controls
 let playBtn = document.querySelector('#play-btn');
 let stopBtn = document.querySelector('#stop-btn');
 let replayBtn = document.querySelector('#replay-btn');
 let resetBtn = document.querySelector('#reset-btn');
 
-// Select rules popup and buttons
+// For showing and closing rules popup
 let rulesBtn = document.querySelector('#rules-btn');
 let rulesPopup = document.querySelector('#rules-popup');
 let closePopup = document.querySelector('#close-popup');
 
-// Store the currently dragged animal
+// Temporary place to remember the one being dragged
 let draggedAnimal;
 
-// Store the audios that are currently playing
+// For storing the audios being played
 let currentAudios = [];
 
 
 // STEP 2 - FUNCTIONALITY
 
-// When user starts dragging an animal
 function startDrag(event) {
   draggedAnimal = this;
 
-  // Optional: show a drag preview image
+  // Just to make it look nicer when dragging
   let dragImg = this.querySelector('img');
-  let dragIcon = dragImg.cloneNode(); // clone the image
+  let dragIcon = dragImg.cloneNode(); 
   dragIcon.width = 80;
   event.dataTransfer.setDragImage(dragIcon, 40, 40);
 
-  console.log("Dragging:", draggedAnimal.id);
+  console.log("Dragging animal:", draggedAnimal.id);
 }
 
-// Allow the animal to be dropped
 function allowDrop(event) {
-  event.preventDefault(); // necessary to allow drop
+  event.preventDefault(); // Required so we can drop
 }
 
-// When an animal is dropped
 function dropAnimal(event) {
   event.preventDefault();
 
-  // Only drop if the slot is empty
+  // Only drop if the box is empty
   if (!this.hasChildNodes()) {
     let draggedId = draggedAnimal.id;
     let isDuplicate = false;
 
-    // Check if this animal has already been placed
+    // Check if that animal already got dropped somewhere
     dropSlots.forEach(slot => {
       let existing = slot.querySelector('.animal');
       if (existing && existing.id == draggedId) {
@@ -62,43 +59,41 @@ function dropAnimal(event) {
     });
 
     if (isDuplicate) {
-      console.log("This animal is already on stage:", draggedId);
+      console.log("Already placed:", draggedId);
       return;
     }
 
-    // Create a new animal element (clone of original)
+    // Make a new animal with the same image and sound
     let newAnimal = document.createElement('div');
     newAnimal.classList.add('animal');
     newAnimal.id = draggedId;
     newAnimal.draggable = false;
 
-    // Clone the image and audio
     let clonedImg = draggedAnimal.querySelector('img').cloneNode();
     let clonedAudio = draggedAnimal.querySelector('audio').cloneNode();
 
-    // Add to new animal box
     newAnimal.appendChild(clonedImg);
     newAnimal.appendChild(clonedAudio);
     this.appendChild(newAnimal);
 
-    console.log("Animal dropped:", newAnimal.id);
+    console.log("Dropped:", newAnimal.id);
   }
 }
 
-// Play all sounds when Play button is clicked
 function playSounds() {
-  stopSounds(); // Stop all first
+  stopSounds(); // Clear anything playing
   currentAudios = [];
 
   dropSlots.forEach(slot => {
     let animal = slot.querySelector('.animal');
     if (animal) {
       let audio = animal.querySelector('audio');
-      audio.play(); // play the animal's sound
-      currentAudios.push(audio); // save it so we can stop it later
+      audio.play();
+      currentAudios.push(audio); // Save to stop later
+
       console.log("Playing:", animal.id);
 
-      // Add animation class based on animal type
+      // Add effect animation based on which animal
       let animClass = "";
       if (animal.id == "chicken") animClass = "animate-chicken";
       else if (animal.id == "cow") animClass = "animate-cow";
@@ -113,9 +108,7 @@ function playSounds() {
   });
 }
 
-// Stop all sounds when Stop button is clicked
 function stopSounds() {
-  // Stop each audio and reset time
   currentAudios.forEach(audio => {
     audio.pause();
     audio.currentTime = 0;
@@ -123,7 +116,7 @@ function stopSounds() {
 
   currentAudios = [];
 
-  // Remove animations
+  // Remove the animation classes too
   dropSlots.forEach(slot => {
     let animal = slot.querySelector('.animal');
     if (animal) {
@@ -132,46 +125,44 @@ function stopSounds() {
     }
   });
 
-  console.log("All sounds stopped.");
+  console.log("Stopped everything.");
 }
 
-// Replay current arrangement of animals
 function replaySounds() {
-  console.log("Replaying current animal sounds...");
+  console.log("Replay clicked");
   stopSounds();
   playSounds();
 }
 
-// Reset everything on the stage
 function resetStage() {
   dropSlots.forEach(slot => {
-    slot.innerHTML = ""; // remove all animals
+    slot.innerHTML = ""; // Just clear everything
   });
   stopSounds();
-  console.log("Stage has been reset.");
+  console.log("Stage reset.");
 }
 
 
-// STEP 3 - EVENT LISTENERS
+// STEP 3 - EVENTS
 
-// Allow dragging animals
+// Allow drag on animal
 animalList.forEach(animal => {
   animal.addEventListener('dragstart', startDrag);
 });
 
-// Allow drop on each slot
+// Allow drop on each spot
 dropSlots.forEach(slot => {
   slot.addEventListener('dragover', allowDrop);
   slot.addEventListener('drop', dropAnimal);
 });
 
-// Control button events
+// Button clicks
 playBtn.addEventListener('click', playSounds);
 stopBtn.addEventListener('click', stopSounds);
 replayBtn.addEventListener('click', replaySounds);
 resetBtn.addEventListener('click', resetStage);
 
-// Rules popup
+// Rules popup open / close
 rulesBtn.onclick = function () {
   rulesPopup.style.display = "flex";
 };
@@ -180,5 +171,5 @@ closePopup.onclick = function () {
   rulesPopup.style.display = "none";
 };
 
-// Show rules when page loads
+// Show rules on page load (just so people know what to do)
 rulesPopup.style.display = "flex";
