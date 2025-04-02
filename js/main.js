@@ -1,5 +1,3 @@
-// STEP 1 - VARIABLES
-
 // Get all animals that we can drag
 let animalList = document.querySelectorAll('.animal');
 
@@ -23,8 +21,6 @@ let draggedAnimal;
 // For storing the audios being played
 let currentAudios = [];
 
-
-// STEP 2 - FUNCTIONALITY
 
 function startDrag(event) {
   draggedAnimal = this;
@@ -142,8 +138,6 @@ function resetStage() {
   console.log("Stage reset.");
 }
 
-
-// STEP 3 - EVENTS
 
 // Allow drag on animal
 animalList.forEach(animal => {
