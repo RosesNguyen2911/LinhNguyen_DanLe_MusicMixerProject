@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎶 Farm Symphony 🎶</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header">
+        <h1 id="title">
+            <i class="fas fa-music"></i> Farm Symphony - Drag and Drop Animal <i class="fas fa-music"></i>
+          </h1>                  
+    </div>
+
+    <!-- Control Panel -->
+    <nav id="control-panel">
+        <button id="rules-btn"><i class="fas fa-book"></i> Rules</button>
+        <button id="play-btn"><i class="fas fa-play"></i> Play</button>
+        <button id="stop-btn"><i class="fas fa-stop"></i> Stop</button>
+        <button id="replay-btn"><i class="fas fa-rotate-right"></i> Replay</button>
+        <button id="reset-btn"><i class="fas fa-trash-alt"></i> Reset</button>
+    </nav>
+    
+    <div id="rules-popup">
+        <div class="popup-content">
+          <h2><i class="fas fa-book-open"></i> Game Rules</h2>
+          <ul>
+            <li><i class="fas fa-hand-pointer"></i> Drag animals into empty wood platforms to place them.</li>
+            <li><i class="fas fa-ban"></i> Each animal can only be placed once on the stage.</li>
+            <li><i class="fas fa-play"></i> <strong>Play:</strong> Play all animal sounds in order.</li>
+            <li><i class="fas fa-stop"></i> <strong>Stop:</strong> Stop all playing sounds immediately.</li>
+            <li><i class="fas fa-rotate-right"></i> <strong>Replay:</strong> Replay the current arrangement of sounds.</li>
+            <li><i class="fas fa-trash-alt"></i> <strong>Reset:</strong> Clear all animals from the stage.</li>
+          </ul>
+          <button id="close-popup"><i class="fas fa-times"></i> Close</button>
+        </div>
+      </div>           
+
+    <!-- Main Content -->
+    <section id="main-content">
+        <!-- Farm Background -->
+        <div id="farm-background"></div>
+
+<!-- Animal Selection Toolbar -->
+<div id="animal-toolbar">
+    <h2>Select an Animal</h2>
+  
+    <div class="animal-box">
+      <div class="animal" id="chicken" draggable="true">
+        <img src="images/chicken.svg" alt="Chicken">
+        <h3>Chicken</h3>
+        <audio src="audio/chicken_sound.mp3"></audio>
+      </div>
+    </div>
+  
+    <div class="animal-box">
+      <div class="animal" id="cow" draggable="true">
+        <img src="images/cow.svg" alt="Cow">
+        <h3>Cow</h3>
+        <audio src="audio/cow_sound.mp3"></audio>
+      </div>
+    </div>
+  
+    <div class="animal-box">
+      <div class="animal" id="pig" draggable="true">
+        <img src="images/pig.svg" alt="Pig">
+        <h3>Pig</h3>
+        <audio src="audio/pig_sound.mp3"></audio>
+      </div>
+    </div>
+  
+    <div class="animal-box">
+      <div class="animal" id="sheep" draggable="true">
+        <img src="images/sheep.svg" alt="Sheep">
+        <h3>Sheep</h3>
+        <audio src="audio/sheep_sound.mp3"></audio>
+      </div>
+    </div>
+  
+    <div class="animal-box">
+      <div class="animal" id="horse" draggable="true">
+        <img src="images/horse.svg" alt="Horse">
+        <h3>Horse</h3>
+        <audio src="audio/horse_sound.mp3"></audio>
+      </div>
+    </div>
+  
+    <div class="animal-box">
+      <div class="animal" id="duck" draggable="true">
+        <img src="images/duck.svg" alt="Duck">
+        <h3>Duck</h3>
+        <audio src="audio/duck_sound.mp3"></audio>
+      </div>
+    </div>
+  </div>
+  
+          
+        <div id="farm-area">
+            <p>Drop the animals here!</p>
+        </div>
+
+        <div id="stage">
+            <div class="stage-row">
+              <div class="drop-slot" data-slot="1"></div>
+              <div class="drop-slot" data-slot="2"></div>
+            </div>
+            <div class="stage-row-1">
+              <div class="drop-slot" data-slot="3"></div>
+              <div class="drop-slot" data-slot="4"></div>
+            </div>
+          </div>
+          
+    </section>
+
+    <footer id="footer">
+      <h2 class="hidden">© 2025 Farm Symphony. All rights reserved.</h2>
+  </footer>
+
+    <script src="js/main.js"></script>
+
+</body>
+</html>
